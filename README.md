@@ -13,7 +13,7 @@ Once you have your API key in, then just use it.
 
 Meta command is ```operator``` and commands use a fuzzy match. Not all commands are implemented
 
-### To switch to Text Input:
+### To Switch to Text Input:
 ```'text input', 'switch to text mode ', 'switch to text input'```
 
 ### To Exit Text Input
