@@ -3,7 +3,11 @@ voice-voice interface for ChatGPT. Also allows for text input via meta commands
 
 ## Installation
 
-pip install .
+```pip install .```
+
+## To run
+
+```chadgpt ```
 
 ## Usage
 
