@@ -248,7 +248,7 @@ def do_the_thing():
 	purpose = "The following is a conversation between a user and a chatbot. The user is trying to have a conversation with the chatbot."
 
 	# Define the initial message
-	initial_message = "Hello Brandon, how can I help you today?"
+	initial_message = "Hello User, how can I help you today?"
 
 	print("Bot: "+initial_message)
 
