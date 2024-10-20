@@ -85,7 +85,7 @@ def syntax_highlighting(text):
 
         else:
             split_string[i] = re.sub(r'^\w*\s?', '', split_string[i])
-            split_string[i] = '\033[48;2;191;191;191m\033[30m' + split_string[i] + '\033[0m'
+            #split_string[i] = '\033[48;2;191;191;191m\033[30m' + split_string[i] + '\033[0m'
 
     # Join the string back together
     output_string = ''.join(split_string)
@@ -141,8 +141,8 @@ def get_audio_input(prompt):
     
 def query_chatgpt(message_context):
    
-    response=openai.ChatCompletion.create(
-      model="gpt-3.5-turbo",
+    response=openai.chat.completions.create(
+      model="gpt-4-turbo",
       messages=message_context
     )
     
@@ -245,10 +245,10 @@ def do_the_thing():
 	# Create a new SpeechRecognition recognizer
 	recognizer = sr.Recognizer()
 
-	purpose = "The following is a conversation between a user and a chatbot. The user is trying to have a conversation with the chatbot."
+	purpose = "The following is a conversation between a user and a chatbot. You goal is to help them achieve their task, including what they need to hear or what to search on google/duckduckgo. There will always be a goal to help them understand to better value themselves and identify and heal from codependency or attachment styles.  Ask what the purpose of the conversation is and then do your best to give advice."
 
 	# Define the initial message
-	initial_message = "Hello User, how can I help you today?"
+	initial_message = "Hello, how can I help you today?"
 
 	print("Bot: "+initial_message)
 
@@ -259,7 +259,7 @@ def do_the_thing():
 		{"role": "assistant", "content": initial_message},
 	]
 
-	def operator(command):
+	def check_operator_command(command):
 		
 		if best_match[1] >= 80:
 		    speak_and_print(f"your command is {best_match[0]}")
@@ -268,54 +268,9 @@ def do_the_thing():
 		
 		
 	prompt_for_talk=True
-	'''
-	while True:
-		user_input = get_audio_input(prompt_for_talk)
-		#print(message_context)
-		if user_input is not None:
-		    if check_operator(user_input):
-		        possible_command=re.sub(r'(?i)operator\s*', '', user_input)
-		        yep_a_command=check_operator_command(possible_command)
-		        if yep_a_command:
-		            if "switch to text" in yep_a_command:
-		                user_input=get_multiline_input()
-		            if "quit" in yep_a_command:
-		                exit()
-		            if "holdup" in yep_a_command or "sleep" in yep_a_command:
-		                input("\nHit any key to continue")
-		                prompt_for_talk=True
-		                continue
-		            else:
-		                speak_and_print(f"running command: {yep_a_command}")
-		                prompt_for_talk=True
-		                continue
-		        else:
-		            
-		            speak_and_print(f"`{yep_a_command}` does not match any operator commands ")
-		            prompt_for_talk=True
-		            continue
-		        
 
-		    message_context.append({"role": "user", "content": user_input})
-		    
-		    chatbot_response=query_chatgpt(message_context) 
-		    #chatbot_response="chatbot response "+user_input
-		    
-		    if chatbot_response:
-		    
-		        message_context.append({"role": "assistant", "content": chatbot_response})
-		        
-		        speak_and_print(chatbot_response)
-		    else:
-		        speak_and_print("no response")
-		    
-		    prompt_for_talk=True
-		else:
-		    prompt_for_talk=False
-	'''
 	while True:
 		user_input = get_audio_input(prompt_for_talk)
-		#print(message_context)
 		if user_input is not None:
 		    if check_operator(user_input):
 		        possible_command=re.sub(r'(?i)operator\s*', '', user_input)
